@@ -194,7 +194,7 @@ var locale_data_multi = {
 
 There are some other functions exposed as well:
 
-### `sprintf`
+### sprintf
 
 This is the `sprintf` found at http://www.diveintojavascript.com/projects/javascript-sprintf
 
@@ -211,15 +211,15 @@ The english translation returns:
 Then with sprintf, we can do:
 
 ```javascript
-alert( Jed.sprintf( "I like your %1$s %2$s", 'red', 'shirt' ) );
-// This alerts "There are 5 red crayons."
+alert( Jed.sprintf( "I like your %1$s %2$s.", 'red', 'shirt' ) );
+// This alerts "I like your red shirt."
 ```
 
 But in spanish it would look more like this:
 
 ```javascript
-alert( Jed.sprintf( "Me gusta tu %2$s %1$s", 'roja', 'camisa' ) );
-// This alerts "Me gusta tu camisa roja"
+alert( Jed.sprintf( "Me gusta tu %2$s %1$s.", 'roja', 'camisa' ) );
+// This alerts "Me gusta tu camisa roja."
 ```
 
 ## Translation files (as json)
