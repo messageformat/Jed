@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://SlexAxton@github.com/SlexAxton/Jed.git"
   },
+  "main": "./jed",
   "keywords": [
     "i18n",
     "gettext",
