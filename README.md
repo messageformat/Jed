@@ -54,6 +54,10 @@ This would look up the translation for the 'I have one toaster' string, evaluate
 
 You should use gettext because it works, but also, most major translation support the delivery of `.po` files which are the input to gettext based apps. Different languages vary in their implementations, slightly, but for the most part, these `.po` files can be converted and used nearly untouched.
 
+### References
+
+Mozilla has a good write up on gettext here: https://developer.mozilla.org/en/gettext
+The GNU spec is pretty big, but here: http://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/gettext.html
 
 ## Current Version
 
@@ -208,7 +212,7 @@ The english translation returns:
 
 ```javascript
 "There are %1$d %2$s crayons."
-`
+```
 
 Then with sprintf, we can do:
 
