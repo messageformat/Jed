@@ -1,5 +1,6 @@
 /*
 jed.js
+v0.5.0beta
 -----------
 Gettext style i18n in JavaScript
 
