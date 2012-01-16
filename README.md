@@ -1,5 +1,7 @@
 # jed.js
 
+*A gettext compatible i18n library for modern JavaScript Applications*
+
 Jed offers the entire applicable GNU gettext spec'd set of functions in JavaScript. The api for gettext was written for a language ( C ) with no great support for function overloading, so Jed hopes to add some api love before it goes 1.0.
 
 Many thanks to Joshua I. Miller - <unrtst@cpan.org> - who wrote `gettext.js` back in 2008. I was able to vet a lot of my ideas against his. Also most of the original test suite was ported from the test suite from his project -- jsgettext.berlios.de

@@ -2,7 +2,7 @@
 jed.js
 v0.5.0beta
 -----------
-Gettext style i18n in JavaScript
+A gettext compatible i18n library for modern JavaScript Applications
 
 by Alex Sexton
 WTFPL license for use
