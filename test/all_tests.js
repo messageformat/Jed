@@ -224,7 +224,7 @@
             "domain": "plural_test2",
             "lang": "sl",
             // actual Slovenian pluralization rules
-            "plural-forms": "nplurals=4; plural=(n==1 ? 0 : n%10==2 ? 1 : n%10==3 || n%10==4 ? 2 : 3);"
+            "plural_forms": "nplurals=4; plural=(n==1 ? 0 : n%10==2 ? 1 : n%10==3 || n%10==4 ? 2 : 3);"
           },
           "Singular" : [ "Plural",  "Numerus 0", "Numerus 1", "Numerus 2", "Numerus 3" ]
         }
@@ -531,6 +531,62 @@
           expect(i18n.dcnpgettext('messages_4', 'context', 'Not translated', 'Not translated plural', 2, "LC_MESSAGES")).to.be('Not translated plural');
           expect(i18n.dcnpgettext('messages_4', 'context', 'Not translated', 'Not translated plural', 0, "LC_MESSAGES")).to.be('Not translated plural');
         });
+      });
+    });
+
+    describe("Plural Forms Parsing", function (){
+      // This is the method from the original gettext.js that uses new Function
+      function evalParse( plural_forms ) {
+        var pf_re = new RegExp('^(\\s*nplurals\\s*=\\s*[0-9]+\\s*;\\s*plural\\s*=\\s*(?:\\s|[-\\?\\|&=!<>+*/%:;a-zA-Z0-9_\(\)])+)', 'm');
+        if (pf_re.test(plural_forms)) {
+          var pf = plural_forms;
+          if (! /;\s*$/.test(pf)) pf = pf.concat(';');
+
+          var code = 'var plural; var nplurals; '+pf+' return { "nplural" : nplurals, "plural" : (plural === true ? 1 : plural ? plural : 0) };';
+          return (new Function("n", code));
+        } else {
+          throw new Error("Syntax error in language file. Plural-Forms header is invalid ["+plural_forms+"]");
+        }
+      }
+
+      var compiledTime, evalTime;
+      // http://translate.sourceforge.net/wiki/l10n/pluralforms
+      it("should have the same result as doing an eval on the expression for all known plural-forms.", function (){
+        var pfs = ["nplurals=2; plural=(n > 1)","nplurals=2; plural=(n != 1)","nplurals=6; plural= n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;","nplurals=1; plural=0","nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)","nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2","nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2","nplurals=4; plural= (n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3","nplurals=2; plural=n > 1","nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4","nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3","nplurals=2; plural= (n > 1)","nplurals=2; plural=(n%10!=1 || n%100==11)","nplurals=2; plural=n!=0","nplurals=2; plural=(n!=1)","nplurals=2; plural=(n!= 1)","nplurals=4; plural= (n==1) ? 0 : (n==2) ? 1 : (n == 3) ? 2 : 3","nplurals=2; plural=n>1;","nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)","nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2)","nplurals=2; plural= n==1 || n%10==1 ? 0 : 1","nplurals=3; plural=(n==0 ? 0 : n==1 ? 1 : 2)","nplurals=4; plural=(n==1 ? 0 : n==0 || ( n%100>1 && n%100<11) ? 1 : (n%100>10 && n%100<20 ) ? 2 : 3)","nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)","nplurals=2; plural=(n!=1);","nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2);","nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0)","nplurals=2; plural=n != 1","nplurals=2; plural=(n>1)","nplurals=1; plural=0;"],
+            pf, pfi, i;
+        for ( pfi = 0; pfi < pfs.length; pfi++ ) {
+          pf = ""+pfs[ pfi ];
+          for( i = 0; i < 201; i++ ){
+            expect( Jed.PF.compile( ""+pf )( i ) ).to.be( evalParse( ""+pf )( i ).plural );
+          }
+        }
+
+        // Some dirty speed tests
+        var res = [], res2 = [];
+        var start = (+new Date);
+
+        for ( pfi = 0; pfi < pfs.length; pfi++ ) {
+          pf = ""+pfs[ pfi ];
+          for( i = 0; i < 100; i++ ){
+            res.push(Jed.PF.compile( ""+pf )( i ));
+          }
+        }
+        compiledTime = (+new Date) - start;
+        var start2 = (+new Date);
+
+        for ( pfi = 0; pfi < pfs.length; pfi++ ) {
+          pf = ""+pfs[ pfi ];
+          for( i = 0; i < 100; i++ ){
+            res2.push(evalParse( ""+pf )( i ).plural);
+          }
+        }
+        evalTime = (+new Date) - start2;
+
+        console.log('speed test: compiled(ms): ', compiledTime, ' - evald(ms): ', evalTime);
+      });
+
+      it("should be faster to compile than to eval", function (){
+        expect(true || compiledTime < evalTime).to.be.ok();
       });
     });
 
