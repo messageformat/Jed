@@ -137,7 +137,10 @@ in order to offer easy upgrades -- jsgettext.berlios.de
       return this;
     },
     fetch : function ( sArr ) {
-      return ( sArr ? Jed.sprintf : function(x){ return x; } )(
+      if ( {}.toString.call( sArr ) != '[object Array]' ) {
+        sArr = [].slice.call(arguments);
+      }
+      return ( sArr && sArr.length ? Jed.sprintf : function(x){ return x; } )(
         this._i18n.dcnpgettext(this._domain, this._context, this._key, this._pkey, this._val),
         sArr
       );

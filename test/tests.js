@@ -208,7 +208,7 @@
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
           "test singular": [null, "test_1"],
-          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1p %1$d"],
+          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
           "context\u0004test context": [null, "test_1context"],
           "test2": [null, "test_2"],
           "zero length translation": [null, ""],
@@ -248,8 +248,8 @@
 
         it("should choose the correct pluralization translation", function () {
           expect( i18n.ngettext('test plural %1$d', 'test plural %1$d', 1) ).to.be( 'test_1_singular %1$d' );
-          expect( i18n.ngettext('test plural %1$d', 'test plural %1$d', 2) ).to.be( 'test_1p %1$d' );
-          expect( i18n.ngettext('test plural %1$d', 'test plural %1$d', 0) ).to.be( 'test_1p %1$d' );
+          expect( i18n.ngettext('test plural %1$d', 'test plural %1$d', 2) ).to.be( 'test_1_plural %1$d' );
+          expect( i18n.ngettext('test plural %1$d', 'test plural %1$d', 0) ).to.be( 'test_1_plural %1$d' );
         });
 
         it("should still pass through on plurals", function () {
@@ -359,7 +359,7 @@
               "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "test singular": [null, "test_1"],
-            "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1p %1$d"],
+            "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
             "context\u0004test context": [null, "test_1context"],
             "test2": [null, "test_2"],
             "zero length translation": [null, ""],
@@ -442,7 +442,7 @@
               "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "test singular": [null, "test_1"],
-            "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1p %1$d"],
+            "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
             "context\u0004test context": [null, "test_1context"],
             "test2": [null, "test_2"],
             "zero length translation": [null, ""],
@@ -555,10 +555,75 @@
             pf, pfi, i;
         for ( pfi = 0; pfi < pfs.length; pfi++ ) {
           pf = ""+pfs[ pfi ];
-          for( i = 0; i < 206; i++ ){
+          for( i = 0; i < 106; i++ ){
             expect( Jed.PF.compile( ""+pf )( i ) ).to.be( evalParse( ""+pf )( i ).plural );
           }
         }
+      });
+
+    });
+
+    describe("Chainable API", function () {
+      var locale_data_w_context = {
+        "context_sprintf_test": {
+          "": {
+            "domain": "context_sprintf_test",
+            "lang": "en",
+            "plural-forms": "nplurals=2; plural=(n != 1);"
+          },
+          "test singular": [null, "test_1"],
+          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
+          "context\u0004test context": [null, "test_1context"],
+          "test2": [null, "test_2"],
+          "zero length translation": [null, ""],
+          "context\u0004test2": [null, "test_2context"],
+          "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
+        },
+        "other_domain": {
+          "": {
+            "domain": "other_domain",
+            "lang": "en",
+            "plural-forms": "nplurals=2; plural=(n != 1);"
+          },
+          "test other_domain singular": [null, "other domain test 1"],
+          "context\u0004context other plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
+        }
+      };
+      var i18n = new Jed({
+        "locale_data" : locale_data_w_context,
+        "domain": "context_sprintf_test"
+      });
+
+      it("should handle a simple gettext passthrough", function (){
+        expect( i18n.translate('test singular').fetch() ).to.be('test_1');
+      });
+
+      it("should handle changing domains", function (){
+        expect( i18n.translate('test other_domain singular').onDomain('other_domain').fetch() ).to.be('other domain test 1');
+      });
+
+      it("should allow you to add plural information in the chain.", function () {
+        expect( i18n.translate("test plural %1$d").ifPlural(5, "dont matta").fetch() ).to.be( "test_1_plural %1$d" );
+      });
+
+      it("should take in a sprintf set of args (as array) on the plural lookup", function(){
+        expect( i18n.translate("test plural %1$d").ifPlural(5, "dont matta").fetch([5]) ).to.be( "test_1_plural 5" );
+        expect( i18n.translate("test plural %1$d %2$d").ifPlural(5, "dont matta %1$d %2$d").fetch([5, 6]) ).to.be( "dont matta 5 6" );
+        expect( i18n.translate("test plural %1$d %2$d").ifPlural(1, "dont matta %1$d %2$d").fetch([1, 6]) ).to.be( "test plural 1 6" );
+      });
+
+      it("should take in a sprintf set of args (as args) on the plural lookup", function(){
+        expect( i18n.translate("test plural %1$d %2$d").ifPlural(5, "dont matta %1$d %2$d").fetch(5, 6) ).to.be( "dont matta 5 6" );
+        expect( i18n.translate("test plural %1$d %2$d").ifPlural(1, "dont matta %1$d %2$d").fetch(1, 6) ).to.be( "test plural 1 6" );
+      });
+
+      it("should handle context information.", function () {
+        expect(i18n.translate('test context').withContext('context').fetch() ).to.be('test_1context');
+      });
+
+      it("should be able to do all at the same time.", function () {
+        expect( i18n.translate("context other plural %1$d").withContext('context').onDomain('other_domain').ifPlural(5, "ignored %1$d").fetch(5) ).to.be( "context_plural_1 plural 5" );
+        expect( i18n.translate("context other plural %1$d").withContext('context').onDomain('other_domain').ifPlural(1, "ignored %1$d").fetch(1) ).to.be( "context_plural_1 singular 1" );
       });
 
     });
@@ -572,7 +637,7 @@
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
           "test singular": [null, "test_1"],
-          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1p %1$d"],
+          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
           "context\u0004test context": [null, "test_1context"],
           "test2": [null, "test_2"],
           "zero length translation": [null, ""],
