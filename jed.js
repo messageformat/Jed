@@ -1,10 +1,12 @@
 /*
 jed.js
 v0.5.0beta
+
+https://github.com/SlexAxton/Jed
 -----------
 A gettext compatible i18n library for modern JavaScript Applications
 
-by Alex Sexton
+by Alex Sexton - AlexSexton [at] gmail - @SlexAxton
 WTFPL license for use
 Dojo CLA for contributions
 
@@ -15,8 +17,8 @@ overloading, so Jed allows a little more of that.
 
 Many thanks to Joshua I. Miller - unrtst@cpan.org - who wrote
 gettext.js back in 2008. I was able to vet a lot of my ideas
-against his. Also most of the original test suite was ported
-from the test suite from his project -- jsgettext.berlios.de
+against his. I also made sure Jed passed against his tests
+in order to offer easy upgrades -- jsgettext.berlios.de
 */
 (function (root, undef) {
 
@@ -113,11 +115,45 @@ from the test suite from his project -- jsgettext.berlios.de
   function getPluralFormFunc ( plural_form_string ) {
     return Jed.PF.compile( plural_form_string || "nplurals=2; plural=(n != 1);");
   }
+
+  function Chain( key, i18n ){
+    this._key = key;
+    this._i18n = i18n;
+  }
+
+  // Create a chainable api for adding args prettily
+  _.extend( Chain.prototype, {
+    onDomain : function ( domain ) {
+      this._domain = domain;
+      return this;
+    },
+    withContext : function ( context ) {
+      this._context = context;
+      return this;
+    },
+    ifPlural : function ( num, pkey ) {
+      this._val = num;
+      this._pkey = pkey;
+      return this;
+    },
+    fetch : function ( sArr ) {
+      return ( sArr ? Jed.sprintf : function(x){ return x; } )(
+        this._i18n.dcnpgettext(this._domain, this._context, this._key, this._pkey, this._val),
+        sArr
+      );
+    }
+  });
+
   // Add functions to the Jed prototype.
   // These will be the functions on the object that's returned
   // from creating a `new Jed()`
   // These seem redundant, but they gzip pretty well.
   _.extend( Jed.prototype, {
+    // The sexier api start point
+    translate : function ( key ) {
+      return new Chain( key, this );
+    },
+
     textdomain : function ( domain ) {
       if ( ! domain ) {
         return this._textdomain;

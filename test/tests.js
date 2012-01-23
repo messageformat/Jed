@@ -104,10 +104,10 @@
           "lang": "en",
           "plural-forms": "nplurals=2; plural=(n != 1);"
         },
-        "test": [null, "XXtestXX"],
-        "test singular": ["test plural", "XXtestXX singular", "XXtestXX plural"],
-        "context\u0004test": [null, "XXtestXX context"],
-        "context\u0004test singular": ["test context plural", "XXtestXX context singular", "XXtestXX context plural"]
+        "test": [null, "test_1"],
+        "test singular": ["test plural", "test_1 singular", "test_1 plural"],
+        "context\u0004test": [null, "test_1 context"],
+        "context\u0004test singular": ["test context plural", "test_1 context singular", "test_1 context plural"]
       },
       "messages_2": {
         "": {
@@ -115,10 +115,10 @@
           "lang": "en",
           "plural-forms": "nplurals=2; plural=(n != 1);"
         },
-        "test": [null, "22test22"],
-        "test singular": ["test plural", "22test22 singular", "22test22 plural"],
-        "context\u0004test": [null, "22test22 context"],
-        "context\u0004test singular": ["test context plural", "22test22 context singular", "22test22 context plural"]
+        "test": [null, "test_2"],
+        "test singular": ["test plural", "test_2 singular", "test_2 plural"],
+        "context\u0004test": [null, "test_2 context"],
+        "context\u0004test singular": ["test context plural", "test_2 context singular", "test_2 context plural"]
       }
     };
 
@@ -139,8 +139,8 @@
       });
 
       it("should use the correct domain when there are multiple", function () {
-        expect( i18n1.gettext('test') ).to.be('XXtestXX');
-        expect( i18n_2.gettext('test') ).to.be('22test22');
+        expect( i18n1.gettext('test') ).to.be('test_1');
+        expect( i18n_2.gettext('test') ).to.be('test_2');
       });
 
       it("should still pass through non-existent keys", function () {
@@ -162,8 +162,8 @@
         i18n1.textdomain('messages_2');
         i18n_2.textdomain('messages_1');
 
-        expect( i18n1.gettext('test') ).to.be('22test22');
-        expect( i18n_2.gettext('test') ).to.be('XXtestXX');
+        expect( i18n1.gettext('test') ).to.be('test_2');
+        expect( i18n_2.gettext('test') ).to.be('test_1');
         expect( i18n1.textdomain() ).to.be( 'messages_2' );
         expect( i18n_2.textdomain() ).to.be( 'messages_1' );
       });
@@ -174,8 +174,8 @@
         });
 
         it("should allow you to call the domain on the fly", function () {
-          expect( i18n_3.dgettext('messages_1', 'test') ).to.be('XXtestXX');
-          expect( i18n_3.dgettext('messages_2', 'test') ).to.be('22test22');
+          expect( i18n_3.dgettext('messages_1', 'test') ).to.be('test_1');
+          expect( i18n_3.dgettext('messages_2', 'test') ).to.be('test_2');
         });
 
         it("should pass through non-existent keys", function () {
@@ -194,7 +194,7 @@
         });
 
         it("should ignore categories altogether", function () {
-          expect( i18n_4.dcgettext('messages_1', 'test', 'A_CATEGORY') ).to.be('XXtestXX');
+          expect( i18n_4.dcgettext('messages_1', 'test', 'A_CATEGORY') ).to.be('test_1');
         });
       });
     });
@@ -207,14 +207,14 @@
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test singular": [null, "XXtestXX"],
-          "test plural %n": ["test plural %n", "XXtestXXs %n", "XXtestXXp %n"],
-          "context\u0004test context": [null, "XXtestXXcontext"],
-          "test2": [null, "XXtest2XX"],
+          "test singular": [null, "test_1"],
+          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1p %1$d"],
+          "context\u0004test context": [null, "test_1context"],
+          "test2": [null, "test_2"],
           "zero length translation": [null, ""],
-          "context\u0004test2": [null, "XXtest2XXcontext"],
+          "context\u0004test2": [null, "test_2context"],
           "Not translated plural": [null, "asdf", "asdf"], // this should never hit, since it's msgid2
-          "context\u0004context plural %n": ["plural %n", "XXcpXX singular %n", "XXcpXX plural %n"]
+          "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
         }
       };
 
@@ -247,9 +247,9 @@
         });
 
         it("should choose the correct pluralization translation", function () {
-          expect( i18n.ngettext('test plural %n', 'test plural %n', 1) ).to.be( 'XXtestXXs %n' );
-          expect( i18n.ngettext('test plural %n', 'test plural %n', 2) ).to.be( 'XXtestXXp %n' );
-          expect( i18n.ngettext('test plural %n', 'test plural %n ZZ', 0) ).to.be( 'XXtestXXp %n' );
+          expect( i18n.ngettext('test plural %1$d', 'test plural %1$d', 1) ).to.be( 'test_1_singular %1$d' );
+          expect( i18n.ngettext('test plural %1$d', 'test plural %1$d', 2) ).to.be( 'test_1p %1$d' );
+          expect( i18n.ngettext('test plural %1$d', 'test plural %1$d', 0) ).to.be( 'test_1p %1$d' );
         });
 
         it("should still pass through on plurals", function () {
@@ -278,10 +278,10 @@
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test": [null, "XXtestXX"],
-          "test singular": ["test plural", "XXtestXX singular", "XXtestXX plural"],
-          "context\u0004test": [null, "XXtestXX context"],
-          "context\u0004test singular": ["test context plural", "XXtestXX context singular", "XXtestXX context plural"]
+          "test": [null, "test_1"],
+          "test singular": ["test plural", "test_1 singular", "test_1 plural"],
+          "context\u0004test": [null, "test_1 context"],
+          "context\u0004test singular": ["test context plural", "test_1 context singular", "test_1 context plural"]
         },
         "messages_4": {
           "": {
@@ -289,10 +289,10 @@
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test": [null, "22test22"],
-          "test singular": ["test plural", "22test22 singular", "22test22 plural"],
-          "context\u0004test": [null, "22test22 context"],
-          "context\u0004test singular": ["test context plural", "22test22 context singular", "22test22 context plural"]
+          "test": [null, "test_2"],
+          "test singular": ["test plural", "test_2 singular", "test_2 plural"],
+          "context\u0004test": [null, "test_2 context"],
+          "context\u0004test singular": ["test context plural", "test_2 context singular", "test_2 context plural"]
         }
       };
 
@@ -306,13 +306,13 @@
         });
 
         it("should pluralize correctly, based on domain rules", function () {
-          expect(i18n.dngettext('messages_3', 'test singular', 'test plural', 1)).to.be('XXtestXX singular');
-          expect(i18n.dngettext('messages_3', 'test singular', 'test plural', 2)).to.be('XXtestXX plural');
-          expect(i18n.dngettext('messages_3', 'test singular', 'test plural', 0)).to.be('XXtestXX plural');
+          expect(i18n.dngettext('messages_3', 'test singular', 'test plural', 1)).to.be('test_1 singular');
+          expect(i18n.dngettext('messages_3', 'test singular', 'test plural', 2)).to.be('test_1 plural');
+          expect(i18n.dngettext('messages_3', 'test singular', 'test plural', 0)).to.be('test_1 plural');
 
-          expect(i18n.dngettext('messages_4', 'test singular', 'test plural', 1)).to.be('22test22 singular');
-          expect(i18n.dngettext('messages_4', 'test singular', 'test plural', 2)).to.be('22test22 plural');
-          expect(i18n.dngettext('messages_4', 'test singular', 'test plural', 0)).to.be('22test22 plural');
+          expect(i18n.dngettext('messages_4', 'test singular', 'test plural', 1)).to.be('test_2 singular');
+          expect(i18n.dngettext('messages_4', 'test singular', 'test plural', 2)).to.be('test_2 plural');
+          expect(i18n.dngettext('messages_4', 'test singular', 'test plural', 0)).to.be('test_2 plural');
         });
 
         it("should passthrough non-found keys regardless of pluralization addition", function (){
@@ -332,13 +332,13 @@
         });
 
         it("should more or less ignore the category", function () {
-          expect(i18n.dcngettext('messages_3', 'test singular', 'test plural', 1, 'LC_MESSAGES')).to.be('XXtestXX singular');
-          expect(i18n.dcngettext('messages_3', 'test singular', 'test plural', 2, 'LC_MESSAGES')).to.be('XXtestXX plural');
-          expect(i18n.dcngettext('messages_3', 'test singular', 'test plural', 0, 'LC_MESSAGES')).to.be('XXtestXX plural');
+          expect(i18n.dcngettext('messages_3', 'test singular', 'test plural', 1, 'LC_MESSAGES')).to.be('test_1 singular');
+          expect(i18n.dcngettext('messages_3', 'test singular', 'test plural', 2, 'LC_MESSAGES')).to.be('test_1 plural');
+          expect(i18n.dcngettext('messages_3', 'test singular', 'test plural', 0, 'LC_MESSAGES')).to.be('test_1 plural');
 
-          expect(i18n.dcngettext('messages_4', 'test singular', 'test plural', 1, 'LC_MESSAGES')).to.be('22test22 singular');
-          expect(i18n.dcngettext('messages_4', 'test singular', 'test plural', 2, 'LC_MESSAGES')).to.be('22test22 plural');
-          expect(i18n.dcngettext('messages_4', 'test singular', 'test plural', 0, 'LC_MESSAGES')).to.be('22test22 plural');
+          expect(i18n.dcngettext('messages_4', 'test singular', 'test plural', 1, 'LC_MESSAGES')).to.be('test_2 singular');
+          expect(i18n.dcngettext('messages_4', 'test singular', 'test plural', 2, 'LC_MESSAGES')).to.be('test_2 plural');
+          expect(i18n.dcngettext('messages_4', 'test singular', 'test plural', 0, 'LC_MESSAGES')).to.be('test_2 plural');
 
           expect(i18n.dcngettext('messages_3', 'Not translated', 'Not translated plural', 1, 'LC_MESSAGES')).to.be('Not translated');
           expect(i18n.dcngettext('messages_3', 'Not translated', 'Not translated plural', 2, 'LC_MESSAGES')).to.be('Not translated plural');
@@ -358,13 +358,13 @@
               "lang": "en",
               "plural-forms": "nplurals=2; plural=(n != 1);"
             },
-            "test singular": [null, "XXtestXX"],
-            "test plural %n": ["test plural %n", "XXtestXXs %n", "XXtestXXp %n"],
-            "context\u0004test context": [null, "XXtestXXcontext"],
-            "test2": [null, "XXtest2XX"],
+            "test singular": [null, "test_1"],
+            "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1p %1$d"],
+            "context\u0004test context": [null, "test_1context"],
+            "test2": [null, "test_2"],
             "zero length translation": [null, ""],
-            "context\u0004test2": [null, "XXtest2XXcontext"],
-            "context\u0004context plural %n": ["plural %n", "XXcpXX singular %n", "XXcpXX plural %n"]
+            "context\u0004test2": [null, "test_2context"],
+            "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
           }
         };
 
@@ -378,7 +378,7 @@
         });
 
         it("should accept a context and look up a new key using the context_glue", function () {
-          expect( i18n.pgettext('context', 'test context') ).to.be( 'XXtestXXcontext' );
+          expect( i18n.pgettext('context', 'test context') ).to.be( 'test_1context' );
         });
 
         it("should still pass through missing keys", function () {
@@ -386,8 +386,8 @@
         });
 
         it("should make sure same msgid returns diff results w/ context when appropriate", function () {
-          expect(i18n.gettext('test2')).to.be('XXtest2XX');
-          expect(i18n.pgettext('context', 'test2')).to.be( 'XXtest2XXcontext' );
+          expect(i18n.gettext('test2')).to.be('test_2');
+          expect(i18n.pgettext('context', 'test2')).to.be( 'test_2context' );
         });
       });
 
@@ -401,8 +401,8 @@
         });
 
         it("should use the domain and the context simultaneously", function () {
-          expect(i18n.dpgettext('messages_3', 'context', 'test')).to.be('XXtestXX context');
-          expect(i18n.dpgettext('messages_4', 'context', 'test')).to.be('22test22 context');
+          expect(i18n.dpgettext('messages_3', 'context', 'test')).to.be('test_1 context');
+          expect(i18n.dpgettext('messages_4', 'context', 'test')).to.be('test_2 context');
         });
 
         it("should pass through if either the domain, the key or the context isn't found", function () {
@@ -422,8 +422,8 @@
         });
 
         it("should use the domain and the context simultaneously - ignore the category", function () {
-          expect(i18n.dcpgettext('messages_3', 'context', 'test', 'LC_MESSAGES')).to.be('XXtestXX context');
-          expect(i18n.dcpgettext('messages_4', 'context', 'test', 'LC_MESSAGES')).to.be('22test22 context');
+          expect(i18n.dcpgettext('messages_3', 'context', 'test', 'LC_MESSAGES')).to.be('test_1 context');
+          expect(i18n.dcpgettext('messages_4', 'context', 'test', 'LC_MESSAGES')).to.be('test_2 context');
         });
 
         it("should pass through if either the domain, the key or the context isn't found", function () {
@@ -441,13 +441,13 @@
               "lang": "en",
               "plural-forms": "nplurals=2; plural=(n != 1);"
             },
-            "test singular": [null, "XXtestXX"],
-            "test plural %n": ["test plural %n", "XXtestXXs %n", "XXtestXXp %n"],
-            "context\u0004test context": [null, "XXtestXXcontext"],
-            "test2": [null, "XXtest2XX"],
+            "test singular": [null, "test_1"],
+            "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1p %1$d"],
+            "context\u0004test context": [null, "test_1context"],
+            "test2": [null, "test_2"],
             "zero length translation": [null, ""],
-            "context\u0004test2": [null, "XXtest2XXcontext"],
-            "context\u0004context plural %n": ["plural %n", "XXcpXX singular %n", "XXcpXX plural %n"]
+            "context\u0004test2": [null, "test_2context"],
+            "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
           }
         };
 
@@ -461,9 +461,9 @@
         });
 
         it("should handle plurals at the same time as contexts", function () {
-          expect(i18n.npgettext('context', 'context plural %n', 'plural %n', 1)).to.be('XXcpXX singular %n');
-          expect(i18n.npgettext('context', 'context plural %n', 'plural %n', 2)).to.be('XXcpXX plural %n');
-          expect(i18n.npgettext('context', 'context plural %n', 'plural %n', 0)).to.be('XXcpXX plural %n');
+          expect(i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 1)).to.be('context_plural_1 singular %1$d');
+          expect(i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 2)).to.be('context_plural_1 plural %1$d');
+          expect(i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 0)).to.be('context_plural_1 plural %1$d');
         });
 
         it("should just pass through on not-found cases", function () {
@@ -483,13 +483,13 @@
         });
 
         it("should be able to do a domain, context, and pluralization lookup all at once", function () {
-          expect(i18n.dnpgettext('messages_3', 'context', 'test singular', 'test plural', 1)).to.be('XXtestXX context singular');
-          expect(i18n.dnpgettext('messages_3', 'context', 'test singular', 'test plural', 2)).to.be('XXtestXX context plural');
-          expect(i18n.dnpgettext('messages_3', 'context', 'test singular', 'test plural', 0)).to.be('XXtestXX context plural');
+          expect(i18n.dnpgettext('messages_3', 'context', 'test singular', 'test plural', 1)).to.be('test_1 context singular');
+          expect(i18n.dnpgettext('messages_3', 'context', 'test singular', 'test plural', 2)).to.be('test_1 context plural');
+          expect(i18n.dnpgettext('messages_3', 'context', 'test singular', 'test plural', 0)).to.be('test_1 context plural');
 
-          expect(i18n.dnpgettext('messages_4', 'context', 'test singular', 'test plural', 1)).to.be('22test22 context singular');
-          expect(i18n.dnpgettext('messages_4', 'context', 'test singular', 'test plural', 2)).to.be('22test22 context plural');
-          expect(i18n.dnpgettext('messages_4', 'context', 'test singular', 'test plural', 0)).to.be('22test22 context plural');
+          expect(i18n.dnpgettext('messages_4', 'context', 'test singular', 'test plural', 1)).to.be('test_2 context singular');
+          expect(i18n.dnpgettext('messages_4', 'context', 'test singular', 'test plural', 2)).to.be('test_2 context plural');
+          expect(i18n.dnpgettext('messages_4', 'context', 'test singular', 'test plural', 0)).to.be('test_2 context plural');
         });
 
         it("should pass through if everything doesn't point towards a key", function () {
@@ -513,13 +513,13 @@
         });
 
         it("should be able to do a domain, context, and pluralization lookup all at once - ignore category", function () {
-          expect(i18n.dcnpgettext('messages_3', 'context', 'test singular', 'test plural', 1, "LC_MESSAGES")).to.be('XXtestXX context singular');
-          expect(i18n.dcnpgettext('messages_3', 'context', 'test singular', 'test plural', 2, "LC_MESSAGES")).to.be('XXtestXX context plural');
-          expect(i18n.dcnpgettext('messages_3', 'context', 'test singular', 'test plural', 0, "LC_MESSAGES")).to.be('XXtestXX context plural');
+          expect(i18n.dcnpgettext('messages_3', 'context', 'test singular', 'test plural', 1, "LC_MESSAGES")).to.be('test_1 context singular');
+          expect(i18n.dcnpgettext('messages_3', 'context', 'test singular', 'test plural', 2, "LC_MESSAGES")).to.be('test_1 context plural');
+          expect(i18n.dcnpgettext('messages_3', 'context', 'test singular', 'test plural', 0, "LC_MESSAGES")).to.be('test_1 context plural');
 
-          expect(i18n.dcnpgettext('messages_4', 'context', 'test singular', 'test plural', 1, "LC_MESSAGES")).to.be('22test22 context singular');
-          expect(i18n.dcnpgettext('messages_4', 'context', 'test singular', 'test plural', 2, "LC_MESSAGES")).to.be('22test22 context plural');
-          expect(i18n.dcnpgettext('messages_4', 'context', 'test singular', 'test plural', 0, "LC_MESSAGES")).to.be('22test22 context plural');
+          expect(i18n.dcnpgettext('messages_4', 'context', 'test singular', 'test plural', 1, "LC_MESSAGES")).to.be('test_2 context singular');
+          expect(i18n.dcnpgettext('messages_4', 'context', 'test singular', 'test plural', 2, "LC_MESSAGES")).to.be('test_2 context plural');
+          expect(i18n.dcnpgettext('messages_4', 'context', 'test singular', 'test plural', 0, "LC_MESSAGES")).to.be('test_2 context plural');
         });
 
         it("should pass through if everything doesn't point towards a key", function () {
@@ -565,25 +565,25 @@
 
     describe("Sprintf", function () {
       var locale_data_w_context = {
-        "context_stargs_test": {
+        "context_sprintf_test": {
           "": {
-            "domain": "context_stargs_test",
+            "domain": "context_sprintf_test",
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test singular": [null, "XXtestXX"],
-          "test plural %n": ["test plural %n", "XXtestXXs %n", "XXtestXXp %n"],
-          "context\u0004test context": [null, "XXtestXXcontext"],
-          "test2": [null, "XXtest2XX"],
+          "test singular": [null, "test_1"],
+          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1p %1$d"],
+          "context\u0004test context": [null, "test_1context"],
+          "test2": [null, "test_2"],
           "zero length translation": [null, ""],
-          "context\u0004test2": [null, "XXtest2XXcontext"],
-          "context\u0004context plural %n": ["plural %n", "XXcpXX singular %n", "XXcpXX plural %n"]
+          "context\u0004test2": [null, "test_2context"],
+          "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
         }
       };
 
       var i18n = new Jed({
         "locale_data" : locale_data_w_context,
-        "domain": "context_stargs_test"
+        "domain": "context_sprintf_test"
       });
 
 
