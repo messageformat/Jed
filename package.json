@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://SlexAxton@github.com/SlexAxton/Jed.git"
   },
+  "scripts": {
+    "test": "make test"
+  },
   "main": "./jed",
   "keywords": [
     "i18n",
