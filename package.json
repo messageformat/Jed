@@ -1,6 +1,6 @@
 {
   "name": "jed",
-  "version": "0.5.0beta",
+  "version": "0.5.0",
   "author": "Alex Sexton <alexsexton@gmail.com>",
   "description": "A gettext compatible i18n library for modern JavaScript Applications",
   "repository": {
