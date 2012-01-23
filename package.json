@@ -21,7 +21,6 @@
   "devDependencies" : {
     "mocha" : "*",
     "expect.js" : "*",
-    "underscore": "*",
     "serve": "*"
   },
   "license": "Use: WTFPL, Contribute: Dojo CLA"
