@@ -9,6 +9,11 @@ For more info, please visit the docs site at <http://slexaxton.github.com/Jed>.
 
 `v0.5.0`
 
+## Todo
+
+* Build time generation of plural form functions
+* Web interface for building translation sets
+* Code introspection for default values
 
 ## License
 
@@ -35,4 +40,4 @@ The sprintf implementation is from:
 
 ## The name
 
-The name jed.js is an homage to Jed Schmidt - the JavaScript community member who is a japanese translator by day, and a "hobbyist" JavaScript programmer by night. Give your kids three character names and they'll probably get software named after them too.
+The name jed.js is an homage to Jed Schmidt (<https://github.com/jed>) the JavaScript community member who is a japanese translator by day, and a "hobbyist" JavaScript programmer by night. Give your kids three character names and they'll probably get software named after them too.
