@@ -10,9 +10,16 @@
   "main": "./jed",
   "keywords": [
     "i18n",
+    "Jed",
     "gettext",
     "internationalization"
   ],
   "dependencies" : {},
-  "license": "WTFPL"
+  "devDependencies" : {
+    "mocha" : "*",
+    "expect.js" : "*",
+    "underscore": "*",
+    "serve": "*"
+  },
+  "license": "Use: WTFPL, Contribute: Dojo CLA"
 }
