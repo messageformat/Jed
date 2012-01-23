@@ -7,7 +7,7 @@ For more info, please visit the docs site at <http://slexaxton.github.com/Jed>.
 
 ## Current Version
 
-`v0.1.0`
+`v0.5.0`
 
 
 ## License
