@@ -2,7 +2,7 @@
   "name": "jed",
   "version": "0.5.0",
   "author": "Alex Sexton <alexsexton@gmail.com>",
-  "description": "A gettext compatible i18n library for modern JavaScript Applications",
+  "description": "Gettext Style i18n for Modern JavaScript Apps",
   "repository": {
     "type": "git",
     "url": "https://SlexAxton@github.com/SlexAxton/Jed.git"

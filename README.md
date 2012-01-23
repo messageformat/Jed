@@ -1,6 +1,6 @@
 # Jed
 
-*A Gettext Style i18n Library For Modern JavaScript Applications*
+*Gettext Style i18n for Modern JavaScript Apps*
 
 For more info, please visit the docs site at <http://slexaxton.github.com/Jed>.
 
