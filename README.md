@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/SlexAxton/Jed.png)](http://travis-ci.org/SlexAxton/Jed)
+
 # Jed
 
 *Gettext Style i18n for Modern JavaScript Apps*
