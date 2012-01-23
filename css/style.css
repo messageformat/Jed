@@ -63,6 +63,15 @@ ul li {
 ul li:nth-child(odd) {
   background-color: #DBD9C2;
 }
+#fork {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width:149px;
+  height:149px;
+  text-decoration: none;
+}
 
 code .comment { color: #AAA }
 code .init { color: #2F6FAD }
