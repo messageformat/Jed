@@ -68,9 +68,7 @@ in order to offer easy upgrades -- jsgettext.berlios.de
     extend : function( obj ) {
       this.forEach( slice.call( arguments, 1 ), function ( source ) {
         for ( var prop in source ) {
-          if (source[prop] !== void 0) {
-            obj[prop] = source[prop];
-          }
+          obj[prop] = source[prop];
         }
       });
       return obj;
