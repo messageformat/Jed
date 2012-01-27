@@ -224,7 +224,7 @@ in order to offer easy upgrades -- jsgettext.berlios.de
       // Default the value to the singular case
       val = typeof val == 'undefined' ? 1 : val;
 
-      var fallack;
+      var fallback;
 
       // Handle special cases
 
