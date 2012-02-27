@@ -2,7 +2,7 @@ REPORTER = dot
 
 test:
 	@./node_modules/.bin/mocha \
-		--require /test/common \
+		--require test/common \
 		--reporter $(REPORTER) \
 		--growl \
 		test/tests.js
