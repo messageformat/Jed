@@ -1,6 +1,6 @@
 {
   "name": "jed",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": "Alex Sexton <alexsexton@gmail.com>",
   "description": "Gettext Style i18n for Modern JavaScript Apps",
   "repository": {
