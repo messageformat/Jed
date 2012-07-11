@@ -274,8 +274,8 @@ in order to offer easy upgrades -- jsgettext.berlios.de
       var key  = context ? context + Jed.context_delimiter + singular_key : singular_key,
           locale_data = this.options.locale_data,
           dict = locale_data[ domain ],
-          defaultPF = this.defaults.locale_data.messages[""].plural_forms,
-          val_idx = getPluralFormFunc( dict[ "" ].plural_forms )( val ) + 1,
+          pluralForms = dict[""].plural_forms || (locale_data.messages || this.defaults.locale_data.messages)[""].plural_forms,
+          val_idx = getPluralFormFunc(pluralForms)(val) + 1,
           val_list,
           res;
 
@@ -290,7 +290,7 @@ in order to offer easy upgrades -- jsgettext.berlios.de
       // english style singular/plural with the keys passed in.
       if ( ! val_list || val_idx >= val_list.length ) {
         res = [ null, singular_key, plural_key ];
-        return res[ getPluralFormFunc()( val ) + 1 ];
+        return res[ getPluralFormFunc(pluralForms)( val ) + 1 ];
       }
 
       res = val_list[ val_idx ];
@@ -298,7 +298,7 @@ in order to offer easy upgrades -- jsgettext.berlios.de
       // This includes empty strings on purpose
       if ( ! res  ) {
         res = [ null, singular_key, plural_key ];
-        return res[ getPluralFormFunc()( val ) + 1 ];
+        return res[ getPluralFormFunc(pluralForms)( val ) + 1 ];
       }
       return res;
     }
