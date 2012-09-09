@@ -98,8 +98,8 @@ in order to offer easy upgrades -- jsgettext.berlios.de
     this.options = _.extend( {}, this.defaults, options );
     this.textdomain( this.options.domain );
 
-    if ( options.domain && ! this.options.locale_data[ this.options.domain ] ) {
-      throw new Error('Text domain set to non-existent domain: `' + domain + '`');
+    if ( this.options.domain && ! this.options.locale_data[ this.options.domain ] ) {
+      throw new Error('Text domain set to non-existent domain: `' + this.options.domain + '`');
     }
   };
 
@@ -259,12 +259,7 @@ in order to offer easy upgrades -- jsgettext.berlios.de
 
       // Handle invalid numbers, but try casting strings for good measure
       if ( typeof val != 'number' ) {
-        try {
-          val = parseInt( val, 10 );
-        }
-        catch ( e ) {
-          throw new Error('Error parsing the value.');
-        }
+        val = parseInt( val, 10 );
 
         if ( isNaN( val ) ) {
           throw new Error('The number that was passed in is not a number.');
@@ -943,7 +938,7 @@ pushState:function begin(condition) {
     }});
 lexer.performAction = function anonymous(yy,yy_,$avoiding_name_collisions,YY_START) {
 
-var YYSTATE=YY_START
+var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
