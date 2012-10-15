@@ -98,8 +98,8 @@ in order to offer easy upgrades -- jsgettext.berlios.de
     this.options = _.extend( {}, this.defaults, options );
     this.textdomain( this.options.domain );
 
-    if ( this.options.domain && ! this.options.locale_data[ this.options.domain ] ) {
-      throw new Error('Text domain set to non-existent domain: `' + this.options.domain + '`');
+    if ( options.domain && ! this.options.locale_data[ this.options.domain ] ) {
+      throw new Error('Text domain set to non-existent domain: `' + options.domain + '`');
     }
   };
 
