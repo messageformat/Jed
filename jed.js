@@ -284,6 +284,9 @@ in order to offer easy upgrades -- jsgettext.berlios.de
       // If there is no match, then revert back to
       // english style singular/plural with the keys passed in.
       if ( ! val_list || val_idx >= val_list.length ) {
+        if (this.options.missing_key_callback) {
+          this.options.missing_key_callback(key);
+        }
         res = [ null, singular_key, plural_key ];
         return res[ getPluralFormFunc(pluralForms)( val ) + 1 ];
       }
