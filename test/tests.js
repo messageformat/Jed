@@ -93,6 +93,25 @@
       it("should just pass through translations that are empty strings", function () {
         expect( _('zero length translation') ).to.be('zero length translation' );
       });
+
+      it("should call the callback function (if given) when a key is missing", function() {
+        var callbackCalled;
+        function missingKeyCallback(key) {
+          callbackCalled = true;
+        }
+
+        callbackCalled = false;
+        var jedWithCallback = new Jed({
+          "missing_key_callback" : missingKeyCallback
+        });
+        jedWithCallback.gettext('missing key');
+        expect(callbackCalled).to.be(true);
+
+        callbackCalled = false;
+        var jedWithoutCallback = new Jed({});
+        jedWithoutCallback.gettext('missing key');
+        expect(callbackCalled).to.be(false);
+      });
     });
   })();
 
