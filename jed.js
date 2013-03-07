@@ -285,7 +285,7 @@ in order to offer easy upgrades -- jsgettext.berlios.de
       // english style singular/plural with the keys passed in.
       if ( ! val_list || val_idx >= val_list.length ) {
         if (this.options.missing_key_callback) {
-          this.options.missing_key_callback(key);
+          this.options.missing_key_callback(key, domain);
         }
         res = [ null, singular_key, plural_key ];
         return res[ getPluralFormFunc(pluralForms)( val ) + 1 ];
