@@ -91,7 +91,9 @@ in order to offer easy upgrades -- jsgettext.berlios.de
         }
       },
       // The default domain if one is missing
-      "domain" : "messages"
+      "domain" : "messages",
+      // enable debug mode to log untranslated strings to the console
+      "debug" : false
     };
 
     // Mix in the sent options with the default options
@@ -288,6 +290,11 @@ in order to offer easy upgrades -- jsgettext.berlios.de
           this.options.missing_key_callback(key);
         }
         res = [ null, singular_key, plural_key ];
+        
+        // collect untranslated strings
+        if (this.options.debug===true) {
+            console.log(res[ getPluralFormFunc(pluralForms)( val ) + 1 ]);
+        }
         return res[ getPluralFormFunc(pluralForms)( val ) + 1 ];
       }
 
