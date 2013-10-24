@@ -5,7 +5,7 @@
   "description": "Gettext Style i18n for Modern JavaScript Apps",
   "repository": {
     "type": "git",
-    "url": "https://SlexAxton@github.com/SlexAxton/Jed.git"
+    "url": "https://github.com/SlexAxton/Jed.git"
   },
   "scripts": {
     "test": "make test"
