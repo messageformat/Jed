@@ -275,6 +275,7 @@
           expect(i18n.ngettext('Not translated', 'Not translated plural', 1) ).to.be( 'Not translated' );
           expect(i18n.ngettext('Not translated', 'Not translated plural', 2) ).to.be( 'Not translated plural' );
           expect(i18n.ngettext('Not translated', 'Not translated plural', 0) ).to.be( 'Not translated plural' ); 
+          expect(i18n_2.ngettext('Not translated', 'Not translated plural', 3) ).to.be( 'Not translated plural' );
         });
 
         it("should be able to parse complex pluralization rules", function () {
