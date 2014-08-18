@@ -1,8 +1,7 @@
+/**
+ * @preserve jed.js v0.5.0beta https://github.com/SlexAxton/Jed
+ */
 /*
-jed.js
-v0.5.0beta
-
-https://github.com/SlexAxton/Jed
 -----------
 A gettext compatible i18n library for modern JavaScript Applications
 
