@@ -13,6 +13,20 @@ I also maintain [messageformat.js](https://github.com/SlexAxton/messageformat.js
 
 `v0.5.2`
 
+## Parsing Gettext Files
+
+Jed doesn't include a Gettext file parser, but several third-party parsers exist that can have their output adapted for Jed.
+
+#### Node
+
+Just search the npm repository, there are several PO and MO file parsers available.
+
+#### Browser
+
+[Jed Gettext Parser](https://github.com/WrinklyNinja/jed-gettext-parser) is the only known browser MO file parser, and it also works in Node, and outputs Jed-compatible data directly.
+
+[gettext.js](https://code.google.com/p/gettext-js) and [Pomo.js](https://github.com/cfv1984/pomo) both include browser-compatible PO file parsers.
+
 ## Todo
 
 * Build time generation of plural form functions
