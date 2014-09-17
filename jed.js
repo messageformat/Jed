@@ -1,6 +1,6 @@
 /*
 jed.js
-v0.5.0beta
+v0.5.4
 
 https://github.com/SlexAxton/Jed
 -----------
