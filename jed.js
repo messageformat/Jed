@@ -269,7 +269,8 @@ in order to offer easy upgrades -- jsgettext.berlios.de
       var key  = context ? context + Jed.context_delimiter + singular_key : singular_key,
           locale_data = this.options.locale_data,
           dict = locale_data[ domain ],
-          pluralForms = dict[""].plural_forms || (locale_data.messages || this.defaults.locale_data.messages)[""].plural_forms,
+          defaultConf = (locale_data.messages || this.defaults.locale_data.messages)[""],
+          pluralForms = dict[""].plural_forms || dict[""]["Plural-Forms"] || defaultConf.plural_forms || defaultConf["Plural-Forms"],
           val_idx = getPluralFormFunc(pluralForms)(val) + 1,
           val_list,
           res;
