@@ -6,6 +6,8 @@
 
 For more info, please visit the docs site at <http://slexaxton.github.com/Jed>.
 
+## You sure you don't want something more modern?
+
 I also maintain [messageformat.js](https://github.com/SlexAxton/messageformat.js). If you don't specifically need a gettext implementation, I might suggest using MessageFormat instead, as it has better support for plurals/gender and has built-in locale data.
 
 
