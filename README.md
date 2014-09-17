@@ -9,10 +9,6 @@ For more info, please visit the docs site at <http://slexaxton.github.com/Jed>.
 I also maintain [messageformat.js](https://github.com/SlexAxton/messageformat.js). If you don't specifically need a gettext implementation, I might suggest using MessageFormat instead, as it has better support for plurals/gender and has built-in locale data.
 
 
-## Current Version
-
-`v0.5.2`
-
 ## Parsing Gettext Files
 
 Jed doesn't include a Gettext file parser, but several third-party parsers exist that can have their output adapted for Jed.
