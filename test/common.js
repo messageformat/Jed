@@ -1,2 +1,2 @@
-expect = require('../node_modules/expect.js/expect');
+expect = require('expect.js');
 Jed = require('../jed');
