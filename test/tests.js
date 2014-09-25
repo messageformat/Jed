@@ -36,6 +36,18 @@
       }
     };
 
+    var locale_data3 = {
+      "some_domain" : {
+        "" : {
+          "domain"        : "some_domain",
+          "lang"          : "ar",
+          "plural-forms"  : "nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);"
+        },
+        "test" : [null, "test_translation_output3"],
+        "zero length translation" : [ null, "" ]
+      }
+    };
+
     var i18n = new Jed({
       "domain" : "messages",
       "locale_data" : locale_data
@@ -44,6 +56,11 @@
     var i18n_2 = new Jed({
       "domain" : "some_domain",
       "locale_data" : locale_data2
+    });
+
+    var i18n_3 = new Jed({
+      "domain" : "some_domain",
+      "locale_data" : locale_data3
     });
 
     // Standard shorthand function
@@ -56,6 +73,7 @@
       it("should exist", function () {
         expect( i18n ).to.be.ok();
         expect( i18n_2 ).to.be.ok();
+        expect( i18n_3 ).to.be.ok();
         expect( _ ).to.be.ok();
       });
     });
@@ -67,6 +85,10 @@
 
       it("should just pass through strings that aren't translatable", function () {
         expect( i18n.gettext('missing') ).to.be( 'missing' );
+      });
+
+      it("should translate a key in a locale with plural-forms rules that don't assume n==1 will return 0", function () {
+        expect(i18n_3.gettext('test')).to.be('test_translation_output3');
       });
 
       it("should allow you to wrap it as a shorthand function", function () {
