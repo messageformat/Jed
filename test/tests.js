@@ -15,24 +15,24 @@
   (function () {
     var locale_data = {
       "messages" : {
-        "" : { 
+        "" : {
           "domain"        : "messages",
           "lang"          : "en",
           "plural-forms"  : "nplurals=2; plural=(n != 1);"
         },
-        "test" : [null, "test_translation_output"]
+        "test" : ["test_translation_output"]
       }
     };
 
     var locale_data2 = {
       "some_domain" : {
-        "" : { 
+        "" : {
           "domain"        : "some_domain",
           "lang"          : "en",
           "plural-forms"  : "nplurals=2; plural=(n != 1);"
         },
-        "test" : [null, "test_translation_output2"],
-        "zero length translation" : [ null, "" ]
+        "test" : ["test_translation_output2"],
+        "zero length translation" : [""]
       }
     };
 
@@ -43,8 +43,8 @@
           "lang"          : "ar",
           "plural-forms"  : "nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);"
         },
-        "test" : [null, "test_translation_output3"],
-        "zero length translation" : [ null, "" ]
+        "test" : ["test_translation_output3"],
+        "zero length translation" : [""]
       }
     };
 
@@ -145,10 +145,10 @@
           "lang": "en",
           "plural-forms": "nplurals=2; plural=(n != 1);"
         },
-        "test": [null, "test_1"],
-        "test singular": ["test plural", "test_1 singular", "test_1 plural"],
-        "context\u0004test": [null, "test_1 context"],
-        "context\u0004test singular": ["test context plural", "test_1 context singular", "test_1 context plural"]
+        "test": ["test_1"],
+        "test singular": ["test_1 singular", "test_1 plural"],
+        "context\u0004test": ["test_1 context"],
+        "context\u0004test singular": ["test_1 context singular", "test_1 context plural"]
       },
       "messages_2": {
         "": {
@@ -156,10 +156,10 @@
           "lang": "en",
           "plural-forms": "nplurals=2; plural=(n != 1);"
         },
-        "test": [null, "test_2"],
-        "test singular": ["test plural", "test_2 singular", "test_2 plural"],
-        "context\u0004test": [null, "test_2 context"],
-        "context\u0004test singular": ["test context plural", "test_2 context singular", "test_2 context plural"]
+        "test": ["test_2"],
+        "test singular": ["test_2 singular", "test_2 plural"],
+        "context\u0004test": ["test_2 context"],
+        "context\u0004test singular": ["test_2 context singular", "test_2 context plural"]
       }
     };
 
@@ -248,14 +248,14 @@
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test singular": [null, "test_1"],
-          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
-          "context\u0004test context": [null, "test_1context"],
-          "test2": [null, "test_2"],
-          "zero length translation": [null, ""],
-          "context\u0004test2": [null, "test_2context"],
-          "Not translated plural": [null, "asdf", "asdf"], // this should never hit, since it's msgid2
-          "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
+          "test singular": ["test_1"],
+          "test plural %1$d": ["test_1_singular %1$d", "test_1_plural %1$d"],
+          "context\u0004test context": ["test_1context"],
+          "test2": ["test_2"],
+          "zero length translation": [""],
+          "context\u0004test2": ["test_2context"],
+          "Not translated plural": ["asdf", "asdf"], // this should never hit, since it's msgid2
+          "context\u0004context plural %1$d": ["context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
         }
       };
 
@@ -267,7 +267,7 @@
             // actual Slovenian pluralization rules
             "plural_forms": "nplurals=4; plural=(n==1 ? 0 : n%10==2 ? 1 : n%10==3 || n%10==4 ? 2 : 3);"
           },
-          "Singular" : [ "Plural",  "Numerus 0", "Numerus 1", "Numerus 2", "Numerus 3" ]
+          "Singular" : ["Numerus 0", "Numerus 1", "Numerus 2", "Numerus 3" ]
         }
       };
 
@@ -296,7 +296,7 @@
         it("should still pass through on plurals", function () {
           expect(i18n.ngettext('Not translated', 'Not translated plural', 1) ).to.be( 'Not translated' );
           expect(i18n.ngettext('Not translated', 'Not translated plural', 2) ).to.be( 'Not translated plural' );
-          expect(i18n.ngettext('Not translated', 'Not translated plural', 0) ).to.be( 'Not translated plural' ); 
+          expect(i18n.ngettext('Not translated', 'Not translated plural', 0) ).to.be( 'Not translated plural' );
           expect(i18n_2.ngettext('Not translated', 'Not translated plural', 3) ).to.be( 'Not translated plural' );
         });
 
@@ -320,10 +320,10 @@
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test": [null, "test_1"],
-          "test singular": ["test plural", "test_1 singular", "test_1 plural"],
-          "context\u0004test": [null, "test_1 context"],
-          "context\u0004test singular": ["test context plural", "test_1 context singular", "test_1 context plural"]
+          "test": ["test_1"],
+          "test singular": ["test_1 singular", "test_1 plural"],
+          "context\u0004test": ["test_1 context"],
+          "context\u0004test singular": ["test_1 context singular", "test_1 context plural"]
         },
         "messages_4": {
           "": {
@@ -331,10 +331,10 @@
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test": [null, "test_2"],
-          "test singular": ["test plural", "test_2 singular", "test_2 plural"],
-          "context\u0004test": [null, "test_2 context"],
-          "context\u0004test singular": ["test context plural", "test_2 context singular", "test_2 context plural"]
+          "test": ["test_2"],
+          "test singular": ["test_2 singular", "test_2 plural"],
+          "context\u0004test": ["test_2 context"],
+          "context\u0004test singular": ["test_2 context singular", "test_2 context plural"]
         }
       };
 
@@ -400,13 +400,13 @@
               "lang": "en",
               "plural-forms": "nplurals=2; plural=(n != 1);"
             },
-            "test singular": [null, "test_1"],
-            "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
-            "context\u0004test context": [null, "test_1context"],
-            "test2": [null, "test_2"],
-            "zero length translation": [null, ""],
-            "context\u0004test2": [null, "test_2context"],
-            "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
+            "test singular": ["test_1"],
+            "test plural %1$d": ["test_1_singular %1$d", "test_1_plural %1$d"],
+            "context\u0004test context": ["test_1context"],
+            "test2": ["test_2"],
+            "zero length translation": [""],
+            "context\u0004test2": ["test_2context"],
+            "context\u0004context plural %1$d": ["context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
           }
         };
 
@@ -483,13 +483,13 @@
               "lang": "en",
               "plural-forms": "nplurals=2; plural=(n != 1);"
             },
-            "test singular": [null, "test_1"],
-            "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
-            "context\u0004test context": [null, "test_1context"],
-            "test2": [null, "test_2"],
-            "zero length translation": [null, ""],
-            "context\u0004test2": [null, "test_2context"],
-            "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
+            "test singular": ["test_1"],
+            "test plural %1$d": ["test_1_singular %1$d", "test_1_plural %1$d"],
+            "context\u0004test context": ["test_1context"],
+            "test2": ["test_2"],
+            "zero length translation": [""],
+            "context\u0004test2": ["test_2context"],
+            "context\u0004context plural %1$d": ["context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
           }
         };
 
@@ -617,13 +617,13 @@
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test singular": [null, "test_1"],
-          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
-          "context\u0004test context": [null, "test_1context"],
-          "test2": [null, "test_2"],
-          "zero length translation": [null, ""],
-          "context\u0004test2": [null, "test_2context"],
-          "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
+          "test singular": ["test_1"],
+          "test plural %1$d": ["test_1_singular %1$d", "test_1_plural %1$d"],
+          "context\u0004test context": ["test_1context"],
+          "test2": ["test_2"],
+          "zero length translation": [""],
+          "context\u0004test2": ["test_2context"],
+          "context\u0004context plural %1$d": ["context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
         },
         "other_domain": {
           "": {
@@ -631,8 +631,8 @@
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test other_domain singular": [null, "other domain test 1"],
-          "context\u0004context other plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
+          "test other_domain singular": ["other domain test 1"],
+          "context\u0004context other plural %1$d": ["context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
         }
       };
       var i18n = new Jed({
@@ -682,13 +682,13 @@
             "lang": "en",
             "plural-forms": "nplurals=2; plural=(n != 1);"
           },
-          "test singular": [null, "test_1"],
-          "test plural %1$d": ["test plural %1$d", "test_1_singular %1$d", "test_1_plural %1$d"],
-          "context\u0004test context": [null, "test_1context"],
-          "test2": [null, "test_2"],
-          "zero length translation": [null, ""],
-          "context\u0004test2": [null, "test_2context"],
-          "context\u0004context plural %1$d": ["plural %1$d", "context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
+          "test singular": ["test_1"],
+          "test plural %1$d": ["test_1_singular %1$d", "test_1_plural %1$d"],
+          "context\u0004test context": ["test_1context"],
+          "test2": ["test_2"],
+          "zero length translation": [""],
+          "context\u0004test2": ["test_2context"],
+          "context\u0004context plural %1$d": ["context_plural_1 singular %1$d", "context_plural_1 plural %1$d"]
         }
       };
 
