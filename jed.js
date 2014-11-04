@@ -1,5 +1,5 @@
 /**
- * @preserve jed.js v0.5.0beta https://github.com/SlexAxton/Jed
+ * @preserve jed.js https://github.com/SlexAxton/Jed
  */
 /*
 -----------
