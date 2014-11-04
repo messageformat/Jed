@@ -266,7 +266,7 @@ in order to offer easy upgrades -- jsgettext.berlios.de
       var val_idx;
       if (val === undefined) {
         // No value passed in; assume singular key lookup.
-        val_idx = 1;
+        val_idx = 0;
 
       } else {
         // Value has been passed in; use plural-forms calculations.
@@ -280,7 +280,7 @@ in order to offer easy upgrades -- jsgettext.berlios.de
           }
         }
 
-        val_idx = getPluralFormFunc(pluralForms)(val) + 1;
+        val_idx = getPluralFormFunc(pluralForms)(val);
       }
 
       // Throw an error if a domain isn't found
@@ -292,25 +292,25 @@ in order to offer easy upgrades -- jsgettext.berlios.de
 
       // If there is no match, then revert back to
       // english style singular/plural with the keys passed in.
-      if ( ! val_list || val_idx >= val_list.length ) {
+      if ( ! val_list || val_idx > val_list.length ) {
         if (this.options.missing_key_callback) {
           this.options.missing_key_callback(key, domain);
         }
-        res = [ null, singular_key, plural_key ];
+        res = [ singular_key, plural_key ];
 
         // collect untranslated strings
         if (this.options.debug===true) {
-          console.log(res[ getPluralFormFunc(pluralForms)( val ) + 1 ]);
+          console.log(res[ getPluralFormFunc(pluralForms)( val ) ]);
         }
-        return res[ getPluralFormFunc()( val ) + 1 ];
+        return res[ getPluralFormFunc()( val ) ];
       }
 
       res = val_list[ val_idx ];
 
       // This includes empty strings on purpose
       if ( ! res  ) {
-        res = [ null, singular_key, plural_key ];
-        return res[ getPluralFormFunc()( val ) + 1 ];
+        res = [ singular_key, plural_key ];
+        return res[ getPluralFormFunc()( val ) ];
       }
       return res;
     }
