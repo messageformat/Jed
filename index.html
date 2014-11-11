@@ -63,7 +63,7 @@ Jed.sprintf( out, num );
 
   <h2>Sane API Wrappers</h2>
 
-  <p>Sometimes using <code>gettext</code> directly is fine, but knowing which gettext function to call at 
+  <p>Sometimes using <code>gettext</code> directly is fine, but knowing which gettext function to call at
   runtime can often be cumbersome. Since JavaScript supports things like chaining and function overloading,
   we can wrap the original API with one that feels a bit more modern.</p>
 
@@ -123,9 +123,7 @@ var i18n = new Jed({
       // Gettext suggests that you use english as your keys
       // in case the key isn't found, and it can just pass
       // the value directly through.
-      // Note: by convention, the 0-index location of the translations
-      // is never accessed. It's just a thing, I guess.
-      "a key" : [ null, "the translation", "the plural translations", ... ],
+      "a key" : [ "the translation", "the plural translations", ... ],
 
       // The plural form string is converted into a function
       // and the value that's passed into the gettext call
@@ -134,13 +132,13 @@ var i18n = new Jed({
 
       // We're using sprintf interpolation on our keys so we can
       // then sub in the _actual_ values into the result.
-      "%d key" : [ null, "%d key", "%d keys" ],
+      "%d key" : [ "%d key", "%d keys" ],
 
       // Contexts are keys that are just prefixed with a context string
       // with a unicode \u0004 as the delimiter.
       // You can use it for anything. Usually it's just for being content aware
       // in some way (e.g. male vs. female, product vs. category)
-      "context\u0004%d key": [ null, "context %d key", "context %d keys" ]
+      "context\u0004%d key": [ "context %d key", "context %d keys" ]
     }
   }
 });</code></pre>
@@ -153,7 +151,7 @@ var i18n = new Jed({
 i18n.translate('a key').fetch();
 > "the translation"
 
-// Most apps will only require a single Jed instance, but 
+// Most apps will only require a single Jed instance, but
 // occasionally you may need more. You can use the same
 // instance to make as many queries as you want.
 
@@ -170,7 +168,7 @@ i18n.translate("%d key doesnt exist").ifPlural( n, "%d keys dont exist" ).fetch(
 > "5 keys dont exist"
 
 // It's important that you still give the default language plural
-// version in the `ifPlural` call for cases when the key doesn't 
+// version in the `ifPlural` call for cases when the key doesn't
 // exist, however, normally, the values in the translation object
 // are the returned values.
 i18n.translate("%d key").ifPlural( n, "not used, but still important" ).fetch( n );
@@ -191,7 +189,7 @@ i18n.translate("I like the %1$s %2$s.").fetch( "red", "shirt" );
 
 // Then in our spanish language file, we'd have the key:
 { ...
-"I like the %1$s %2$s." : [ null, "Me gusta la %2$s %1$s.", ... ]
+"I like the %1$s %2$s." : [ "Me gusta la %2$s %1$s.", ... ]
 ... }
 
 // <strong>Notice the reverse numbering</strong>, so our result on that locale_data would be:
@@ -223,7 +221,7 @@ var i18n = new Jed({
         "lang"   : "en",
         "plural_forms" : "nplurals=2; plural=(n != 1);"
       },
-      "some key" : [ null, "some value"]
+      "some key" : [ "some value"]
     }
   },
   "domain" : "messages"
@@ -245,7 +243,7 @@ alert( i18n.gettext( "some key" ) ); // alerts "some value"
           "lang"   : "en",
           "plural_forms" : "nplurals=2; plural=(n != 1);"
         },
-        "some key" : [ null, "some value"]
+        "some key" : [ "some value"]
       }
     },
     "domain" : "messages"
@@ -262,16 +260,16 @@ alert( i18n.gettext( "some key" ) ); // alerts "some value"
   <ul>
     <li>d - <strong>Domain</strong> -
     maps to the domain property in the translation files
-    <li>c - <strong>Category</strong> - 
+    <li>c - <strong>Category</strong> -
     ignored in Jed, not applicable
-    <li>n - <strong>Plurals</strong> - 
+    <li>n - <strong>Plurals</strong> -
     handles translations based on pluralization rules for specific languages
-    <li>p - <strong>Context</strong> - 
+    <li>p - <strong>Context</strong> -
     used as translation key prefixes, usually for quick modifiers of the same translation
   </ul>
 
-  <p><small>Note :: I took the same path as `gettext.js` and just ignore any 'Category' information. The methods 
-    are exposed but the information is ignored. I'd recommend not using them at all, but I figured I'd be as 
+  <p><small>Note :: I took the same path as `gettext.js` and just ignore any 'Category' information. The methods
+    are exposed but the information is ignored. I'd recommend not using them at all, but I figured I'd be as
     API compatible with gettext.js as possible.</small></p>
 
   <p>These map to the properties in the translation files.<p>
@@ -290,10 +288,10 @@ npgettext = function ( context, singular_key, plural_key, value )
 dnpgettext = function ( domain, context, singular_key, plural_key, value )
 dcnpgettext = function ( domain, context, singular_key, plural_key, value, category )</code></pre>
 
-  <p>In the code, every function ends up calling <code>dcnpgettext</code> since it's the most specific. It just handles 
+  <p>In the code, every function ends up calling <code>dcnpgettext</code> since it's the most specific. It just handles
   the missing values in the correct manner.</p>
 
-  <p>Jed intentionally made many of the same API choices as gettext.js for these lower level calls in order to offer a step 
+  <p>Jed intentionally made many of the same API choices as gettext.js for these lower level calls in order to offer a step
   up from gettext.js</p>
 
   <p>That means in order instantiate an object to call these functions, you need to create a new `Jed` instance:</p>
@@ -304,10 +302,10 @@ dcnpgettext = function ( domain, context, singular_key, plural_key, value, categ
 
   <p>The <code>options</code> object generally contains 1 or 2 keys: <code>domain</code> and <code>locale_data</code></p>
 
-  <p>The <code>domain</code> setting is which group inside of <code>locale_data</code> that the keys will be 
+  <p>The <code>domain</code> setting is which group inside of <code>locale_data</code> that the keys will be
   looked up in.</p>
 
-  <p>The <code>locale_data</code> is the output from your po2json converter. The tests have a few good 
+  <p>The <code>locale_data</code> is the output from your po2json converter. The tests have a few good
   examples of what these can look like if you are in need of more examples. Here's one to boot:</p>
 
 <pre><code>var locale_data_multi = {
@@ -317,9 +315,9 @@ dcnpgettext = function ( domain, context, singular_key, plural_key, value, categ
       "lang": "en",
       "plural-forms": "nplurals=2; plural=(n != 1);"
     },
-    "test": [null, "test_1"],
+    "test": ["test_1"],
     "test singular": ["test plural", "test_1 singular", "test_1 plural"],
-    "context\u0004test": [null, "test_1 context"],
+    "context\u0004test": ["test_1 context"],
     "context\u0004test singular": ["test context plural", "test_1 context singular", "test_1 context plural"]
   },
   "messages_4": {
@@ -328,9 +326,9 @@ dcnpgettext = function ( domain, context, singular_key, plural_key, value, categ
       "lang": "en",
       "plural-forms": "nplurals=2; plural=(n != 1);"
     },
-    "test": [null, "test_2"],
+    "test": ["test_2"],
     "test singular": ["test plural", "test_2 singular", "test_2 plural"],
-    "context\u0004test": [null, "test_2 context"],
+    "context\u0004test": ["test_2 context"],
     "context\u0004test singular": ["test context plural", "test_2 context singular", "test_2 context plural"]
   }
 };</code></pre>
@@ -342,7 +340,7 @@ dcnpgettext = function ( domain, context, singular_key, plural_key, value, categ
   <p>This is the <code>sprintf</code> found at <a href="http://www.diveintojavascript.com/projects/javascript-sprintf">www.diveintojavascript.com/projects/javascript-sprintf</a>
   - Courtesy of Alexandru Marasteanu.</p>
 
-  <p>It lives as both a 'static' method on the <code>Jed</code> function and on an individual instance. It is used for 
+  <p>It lives as both a 'static' method on the <code>Jed</code> function and on an individual instance. It is used for
   variable replacement after a translation happens. It supports reordering of values as well.</p>
 
   <p>The english translation returns: <code>"There are %1$d %2$s crayons."</code>
@@ -363,7 +361,7 @@ dcnpgettext = function ( domain, context, singular_key, plural_key, value, categ
   <p>There are quite a few available .po to .json converters out there. Gettext .po files are standard
   output from most decent translation companies, as it's an old standard.</p>
 
-  <p>I currently use: 
+  <p>I currently use:
   <a href="https://www.npmjs.org/package/po2json">po2json</a></p>
 
   <p>However, I'd like to add this functionality to a separate Jed module in a future version.</p>
@@ -371,7 +369,7 @@ dcnpgettext = function ( domain, context, singular_key, plural_key, value, categ
   <h2>License</h2>
   <p>You may use this software under the WTFPL.</p>
 
-  <p>You may contribute to this software under the Dojo CLA - 
+  <p>You may contribute to this software under the Dojo CLA -
   <a href="http://dojofoundation.org/about/cla">http://dojofoundation.org/about/cla</a></p>
 
   <h2>Tests</h2>
@@ -382,16 +380,16 @@ make test-browser
 
   <h2>The name</h2>
 
-  <p>The name jed.js is an homage to <a href="https://twitter.com/#!/jedschmidt">Jed Schmidt</a> - the JavaScript community member who is a japanese 
-  translator by day, and a "hobbyist" JavaScript programmer by night. Give your kids three character 
+  <p>The name jed.js is an homage to <a href="https://twitter.com/#!/jedschmidt">Jed Schmidt</a> - the JavaScript community member who is a japanese
+  translator by day, and a "hobbyist" JavaScript programmer by night. Give your kids three character
   names and they'll probably get software named after them too.</p>
 
-  <p>Not coincidentally, his project <a href=" https://github.com/jed/locale">locale</a> could be a good plug 
+  <p>Not coincidentally, his project <a href=" https://github.com/jed/locale">locale</a> could be a good plug
   into jed.js.</p>
 
   <h2>Why gettext?</h2>
 
-  <p>Internationalization is hard. Sun created gettext back in the day as a way to make things 
+  <p>Internationalization is hard. Sun created gettext back in the day as a way to make things
   a little easier.</p>
 
   <p>Many apps that try to internationalize start out with simple key replacements.</p>
@@ -409,7 +407,7 @@ make test-browser
   }
 }</code></pre>
 
-  <p>That works for a little while, until you get into a situation where pluralization changes the 
+  <p>That works for a little while, until you get into a situation where pluralization changes the
   structure of the sentence.</p>
 
   <p>Consider: <em>"I have a toaster"</em> vs. <em>"I have 3 toasters"</em></p>
@@ -418,7 +416,7 @@ make test-browser
 
   <pre><code>"I have the following amount of toasters: " + num_toasters</code></pre>
 
-  <p>This is not ideal from a UX standpoint, and it doesn't work in every language, so some people 
+  <p>This is not ideal from a UX standpoint, and it doesn't work in every language, so some people
   try to do this logic themselves:</p>
 
 <pre><code>if ( num_toasters === 1) {
@@ -429,22 +427,22 @@ else {
 }
 </code></pre>
 
-  <p>That seems to be a good solution until you consider languages like Polish and Russian that 
-  have _much_ more complex rulesets for pluralization than `if not 1`. Splitting the logic on each 
+  <p>That seems to be a good solution until you consider languages like Polish and Russian that
+  have _much_ more complex rulesets for pluralization than `if not 1`. Splitting the logic on each
   language hardly makes it sane or decoupled, so that method is a bust.</p>
 
   <h4>Gettext + sprintf solve these problems.</h4>
 
 <pre><code>alert( sprintf( ngettext('I have one toaster.', 'I have %1$d toasters.', num_toasters), num_toasters ) )</code></pre>
 
-  <p>This would look up the translation for the 'I have one toaster' string, evaluate, the `num_toasters` value 
-  against it's `plural_forms` rule, choose the appropriate sprintf-able string to return, then the sprintf will 
-  sub in the correct data, and output a happy translated string. Since sprintf can handle argument reordering 
+  <p>This would look up the translation for the 'I have one toaster' string, evaluate, the `num_toasters` value
+  against it's `plural_forms` rule, choose the appropriate sprintf-able string to return, then the sprintf will
+  sub in the correct data, and output a happy translated string. Since sprintf can handle argument reordering
   words can be mixed around based on languages own rules.</p>
 
   <h2>Bonus</h2>
 
-  <p>You should use gettext because it works, but also, most major translation support the delivery of `.po` 
+  <p>You should use gettext because it works, but also, most major translation support the delivery of `.po`
   files which are the input to gettext based apps. Different languages vary in their implementations, slightly,
   but for the most part, these `.po` files can be converted and used nearly untouched.</p>
 
