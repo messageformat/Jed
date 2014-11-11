@@ -1011,7 +1011,7 @@ return parser;
   }
   else {
     if (typeof define === 'function' && define.amd) {
-      define('jed', function() {
+      define(function() {
         return Jed;
       });
     }
