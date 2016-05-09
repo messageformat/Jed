@@ -451,12 +451,12 @@ in order to offer easy upgrades -- jsgettext.berlios.de
                   field_list.push(field_match[1]);
                 }
                 else {
-                  throw('[sprintf] huh?');
+                  throw('[sprintf] Named placeholders should only contain valid identifiers.');
                 }
               }
             }
             else {
-              throw('[sprintf] huh?');
+              throw('[sprintf] Named placeholders should only contain valid identifiers.');
             }
             match[2] = field_list;
           }
@@ -464,12 +464,12 @@ in order to offer easy upgrades -- jsgettext.berlios.de
             arg_names |= 2;
           }
           if (arg_names === 3) {
-            throw('[sprintf] mixing positional and named placeholders is not (yet) supported');
+            throw('[sprintf] mixing positional and named placeholders is not (yet) supported.');
           }
           parse_tree.push(match);
         }
         else {
-          throw('[sprintf] huh?');
+          throw('[sprintf] Found percentage-sign, but it wasn\'t a valid placeholder or escaped percentage-sign.');
         }
         _fmt = _fmt.substring(match[0].length);
       }
