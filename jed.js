@@ -6,8 +6,13 @@
 A gettext compatible i18n library for modern JavaScript Applications
 
 by Alex Sexton - AlexSexton [at] gmail - @SlexAxton
-WTFPL license for use
-Dojo CLA for contributions
+
+MIT License
+
+A jQuery Foundation project - requires CLA to contribute -
+https://contribute.jquery.org/CLA/
+
+
 
 Jed offers the entire applicable GNU gettext spec'd set of
 functions, but also offers some nicer wrappers around them.

@@ -8,6 +8,8 @@ For more info, please visit the docs site at <http://slexaxton.github.com/Jed>.
 
 ## You sure you don't want something more modern?
 
+Jed is feature complete in my opinion. I am happy to fix bugs, but generally am not interested in adding more to the library.
+
 I also maintain [messageformat.js](https://github.com/SlexAxton/messageformat.js). If you don't specifically need a gettext implementation, I might suggest using MessageFormat instead, as it has better support for plurals/gender and has built-in locale data.
 
 
@@ -33,14 +35,16 @@ Just search the npm repository, there are several PO and MO file parsers availab
 
 ## License
 
-You may use this software under the WTFPL.
+Jed is a member project of the [jQuery Foundation](https://jquery.org/)
 
-You may contribute to this software under the Dojo CLA - <http://dojofoundation.org/about/cla>
+You may use this software under the MIT License.
+
+You may contribute to this software under the jQuery Foundation CLA - <https://contribute.jquery.org/CLA/>
 
 
 ## Author
 
-* Alex Sexton - @slexaxton - <http://alexsexton.com/>
+* Alex Sexton - @slexaxton - <https://alexsexton.com/>
 
 
 ## Credits
