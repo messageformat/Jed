@@ -575,17 +575,23 @@ in order to offer easy upgrades -- jsgettext.berlios.de
     };
   };
 
+  Jed.PF.regexps = {
+    TRIM_BEG: /^\s\s*/,
+    TRIM_END: /\s\s*$/,
+    HAS_SEMICOLON: /;\s*$/,
+    NPLURALS: /nplurals\=(\d+);/,
+    PLURAL: /plural\=(.*);/
+  };
+
   Jed.PF.extractPluralExpr = function ( p ) {
     // trim first
-    p = p.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+    p = p.replace(Jed.PF.regexps.TRIM_BEG, '').replace(Jed.PF.regexps.TRIM_END, '');
 
-    if (! /;\s*$/.test(p)) {
+    if (! Jed.PF.regexps.HAS_SEMICOLON.test(p)) {
       p = p.concat(';');
     }
 
-    var nplurals_re = /nplurals\=(\d+);/,
-        plural_re = /plural\=(.*);/,
-        nplurals_matches = p.match( nplurals_re ),
+    var nplurals_matches = p.match( Jed.PF.regexps.NPLURALS ),
         res = {},
         plural_matches;
 
@@ -598,8 +604,8 @@ in order to offer easy upgrades -- jsgettext.berlios.de
     }
 
     // remove that data to get to the formula
-    p = p.replace( nplurals_re, "" );
-    plural_matches = p.match( plural_re );
+    p = p.replace( Jed.PF.regexps.NPLURALS, "" );
+    plural_matches = p.match( Jed.PF.regexps.PLURAL );
 
     if (!( plural_matches && plural_matches.length > 1 ) ) {
       throw new Error('`plural` expression not found: ' + p);
