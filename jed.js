@@ -326,9 +326,6 @@ in order to offer easy upgrades -- jsgettext.berlios.de
   // This is not internally used, so you can remove it if you have this
   // available somewhere else, or want to use a different system.
 
-  // We _slightly_ modify the normal sprintf behavior to more gracefully handle
-  // undefined values.
-
   var sprintf = require("sprintf-js").sprintf,
       vsprintf = require("sprintf-js").vsprintf;
 
