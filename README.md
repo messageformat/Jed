@@ -35,11 +35,11 @@ Just search the npm repository, there are several PO and MO file parsers availab
 
 ## License
 
-Jed is a member project of the [jQuery Foundation](https://jquery.org/)
+Jed is a member project of the [JS Foundation](https://js.foundation/)
 
 You may use this software under the MIT License.
 
-You may contribute to this software under the jQuery Foundation CLA - <https://contribute.jquery.org/CLA/>
+You may contribute to this software under the JS Foundation CLA - <https://js.foundation/CLA/>
 
 
 ## Author
