@@ -1,16 +1,16 @@
-[![Build Status](https://secure.travis-ci.org/SlexAxton/Jed.png)](http://travis-ci.org/SlexAxton/Jed)
+[![Build Status](https://secure.travis-ci.org/messageformat/Jed.png)](http://travis-ci.org/messageformat/Jed)
 
 # Jed
 
 *Gettext Style i18n for Modern JavaScript Apps*
 
-For more info, please visit the docs site at <http://slexaxton.github.com/Jed>.
+For more info, please visit the docs site at <http://messageformat.github.com/Jed>.
 
 ## You sure you don't want something more modern?
 
 Jed is feature complete in my opinion. I am happy to fix bugs, but generally am not interested in adding more to the library.
 
-I also maintain [messageformat.js](https://github.com/SlexAxton/messageformat.js). If you don't specifically need a gettext implementation, I might suggest using MessageFormat instead, as it has better support for plurals/gender and has built-in locale data.
+I also maintain [messageformat.js](https://github.com/messageformat/messageformat.js). If you don't specifically need a gettext implementation, I might suggest using MessageFormat instead, as it has better support for plurals/gender and has built-in locale data.
 
 
 ## Parsing Gettext Files
