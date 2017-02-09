@@ -4,7 +4,7 @@
 
 *Gettext Style i18n for Modern JavaScript Apps*
 
-For more info, please visit the docs site at <http://messageformat.github.com/Jed>.
+For more info, please visit the docs site at <http://messageformat.github.io/Jed>.
 
 ## You sure you don't want something more modern?
 
