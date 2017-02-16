@@ -740,6 +740,11 @@
           expect(i18n.sprintf(i, arg)).to.be(strings[i]);
         }
       });
+
+      it("should give meaningfull error messages", function() {
+        expect(Jed.sprintf.bind(null, "5%", {})).to.throwException(/^\[sprintf\] Found percentage-sign, but it wasn't a valid placeholder or escaped percentage-sign.$/);
+        expect(Jed.sprintf.bind(null, "%(1invalid)s", {})).to.throwException(/^\[sprintf\] Named placeholders should only contain valid identifiers.$/);
+      });
     });
   })();
 
