@@ -436,16 +436,25 @@ in order to offer easy upgrades -- jsgettext.berlios.de
     str_format.parse = function(fmt) {
       var _fmt = fmt, match = [], parse_tree = [], arg_names = 0;
       while (_fmt) {
+        // Match all non-percentage sign characters
         if ((match = /^[^\x25]+/.exec(_fmt)) !== null) {
           parse_tree.push(match[0]);
         }
+
+        // Match double percentage-signs
         else if ((match = /^\x25{2}/.exec(_fmt)) !== null) {
           parse_tree.push('%');
         }
+
+        // Match placeholders
         else if ((match = /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosuxX])/.exec(_fmt)) !== null) {
+
+          // Named placeholders
           if (match[2]) {
             arg_names |= 1;
             var field_list = [], replacement_field = match[2], field_match = [];
+
+            // Match all valid identifiers
             if ((field_match = /^([a-z_][a-z_\d]*)/i.exec(replacement_field)) !== null) {
               field_list.push(field_match[1]);
               while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
