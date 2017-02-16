@@ -17,10 +17,12 @@
     "gettext",
     "internationalization"
   ],
-  "dependencies" : {},
-  "devDependencies" : {
-    "mocha" : "*",
-    "expect.js" : "*",
+  "dependencies": {
+    "sprintf-js": "^1.0.3"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "expect.js": "*",
     "serve": "*"
   },
   "license": "MIT"

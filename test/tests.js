@@ -704,7 +704,7 @@
           "thing%1$sbob" : "thing[one]bob",
           "thing%1$s%2$sbob" : "thing[one][two]bob",
           "thing%1$sasdf%2$sasdf" : "thing[one]asdf[two]asdf",
-          "%1$s%2$s%3$s" : "[one][two]",
+          "%1$s%2$s%3$s" : "[one][two]undefined",
           "tom%1$saDick" : "tom[one]aDick"
         };
         var args = ["[one]", "[two]"];
@@ -729,9 +729,9 @@
           "%%" : "%",
           "tom%%dick" : "tom%dick",
           "thing%1$sbob" : "thing[one]bob",
-          "thing%1$s%2$sbob" : "thing[one]bob",
-          "thing%1$sasdf%2$sasdf" : "thing[one]asdfasdf",
-          "%1$s%2$s%3$s" : "[one]"
+          "thing%1$s%2$sbob" : "thing[one]undefinedbob",
+          "thing%1$sasdf%2$sasdf" : "thing[one]asdfundefinedasdf",
+          "%1$s%2$s%3$s" : "[one]undefinedundefined"
         };
         var arg = "[one]";
 
